@@ -8,15 +8,20 @@
   <body>
     <div id="calc">
       <div id="display-container">
-        <div id="top-display"></div>
-        <div id="bottom-display">
-          <button style="border: 0px solid white">C</button>
+        <div id="top-container">
+          <div id="top-display"></div>
+        </div>
+        <div id="bottom-container">
+          <button>C</button>
+          <div id="bottom-display"></div>
         </div>
       </div>
     </div>
   </body>
   <script>
     const calc = document.querySelector("#calc");
+    const topDiv = document.querySelector("#top-display");
+    const botDiv = document.querySelector("#bottom-display");
     buttonCharRows = [
       ["7", "8", "9", "/"],
       ["4", "5", "6", "*"],
@@ -34,6 +39,39 @@
         row.appendChild(button);
       });
       calc.appendChild(row);
+    });
+
+    function processButton(event) {
+      let pressedChar = event.srcElement.textContent;
+
+      if ("0123456789".includes(pressedChar)) {
+        processNumber(pressedChar);
+      } else if ("/*-+".includes(pressedChar)) {
+        console.log("pressed an operator");
+        processOperation(pressedChar);
+      } else if (pressedChar === "=") {
+        console.log("pressed 'equals'");
+      } else if (pressedChar === ".") {
+        console.log("pressed 'point'");
+      } else if (pressedChar === "C") {
+        console.log("pressed C");
+      }
+    }
+
+    function processNumber(number) {
+      console.log("pressed a number");
+      if (botDiv.textContent.length >= 26) {
+        return;
+      }
+      botDiv.textContent += number;
+      topDiv.textContent += number;
+    }
+
+    function processOperation(oper) {}
+
+    let buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+      button.addEventListener("click", processButton);
     });
   </script>
 </html>

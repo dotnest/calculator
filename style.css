@@ -12,20 +12,34 @@ body {
 }
 
 #display-container {
-  background-color: darkorchid;
+  background-color: hotpink;
   width: 100%;
 }
 
-#top-display {
+#top-container {
   background-color: darkturquoise;
-  width: 100%;
+  display: grid;
   height: 60%;
 }
 
-#bottom-display {
-  background-color: hotpink;
-  width: 100%;
+#top-display {
+  align-self: flex-end;
+  justify-self: end;
+  margin: 10px;
+  font-size: 36px;
+}
+
+#bottom-container {
+  display: grid;
+  grid-template-columns: auto 80%;
   height: 40%;
+}
+
+#bottom-display {
+  align-self: flex-end;
+  justify-self: end;
+  margin: 10px;
+  font-size: 28px;
 }
 
 .row {
@@ -36,7 +50,6 @@ body {
 button {
   background-color: powderblue;
   padding: 0 30 0 30;
-  height: 100%;
   font-size: 32px;
   border: 0px solid navy;
 }
