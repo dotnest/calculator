@@ -22,6 +22,8 @@
     const calc = document.querySelector("#calc");
     const topDiv = document.querySelector("#top-display");
     const botDiv = document.querySelector("#bottom-display");
+    let topNumber;
+    let botNumber;
     buttonCharRows = [
       ["7", "8", "9", "/"],
       ["4", "5", "6", "*"],
@@ -47,14 +49,13 @@
       if ("0123456789".includes(pressedChar)) {
         processNumber(pressedChar);
       } else if ("/*-+".includes(pressedChar)) {
-        console.log("pressed an operator");
         processOperation(pressedChar);
       } else if (pressedChar === "=") {
         console.log("pressed 'equals'");
       } else if (pressedChar === ".") {
         console.log("pressed 'point'");
       } else if (pressedChar === "C") {
-        console.log("pressed C");
+        emptyDivs();
       }
     }
 
@@ -64,10 +65,17 @@
         return;
       }
       botDiv.textContent += number;
-      topDiv.textContent += number;
     }
 
     function processOperation(oper) {}
+
+    function emptyDivs() {
+      console.log("emptying Divs");
+      topDiv.textContent = "";
+      botDiv.textContent = "";
+      topNumber = "";
+      botNumber = "";
+    }
 
     let buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
