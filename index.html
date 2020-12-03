@@ -24,6 +24,7 @@
     const botDiv = document.querySelector("#bottom-display");
     let topNumber;
     let botNumber;
+    let prevOper;
     buttonCharRows = [
       ["7", "8", "9", "/"],
       ["4", "5", "6", "*"],
@@ -82,12 +83,46 @@
       botNumber = +botDiv.textContent;
     }
 
-    function processOperation(oper) {}
+    function processOperation(oper) {
+      console.log("pressed an operator");
+      if (!topNumber) {
+        topDiv.textContent = botDiv.textContent + " " + oper;
+        topNumber = +botDiv.textContent;
+        prevOper = oper;
+        botDiv.textContent = "";
+        return;
+      }
+
+      switch (prevOper) {
+        case "+":
+          topNumber = add(topNumber, botNumber);
+          break;
+
+        case "-":
+          topNumber = subtract(topNumber, botNumber);
+          break;
+
+        case "*":
+          topNumber = multiply(topNumber, botNumber);
+          break;
+
+        case "/":
+          topNumber = divide(topNumber, botNumber);
+          break;
+
+        default:
+          return;
+      }
+      prevOper = oper;
+      topDiv.textContent = topNumber;
+      botDiv.textContent = "";
+    }
 
     function emptyDivs() {
       console.log("emptying Divs");
       topDiv.textContent = "";
       botDiv.textContent = "";
+      prevOper = null;
       topNumber = null;
       botNumber = null;
     }
