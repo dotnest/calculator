@@ -69,6 +69,7 @@
         console.log("pressed 'equals'");
       } else if (pressedChar === ".") {
         console.log("pressed 'point'");
+        processPoint();
       } else if (pressedChar === "C") {
         emptyDivs();
       }
@@ -116,6 +117,14 @@
       prevOper = oper;
       topDiv.textContent = topNumber;
       botDiv.textContent = "";
+    }
+
+    function processPoint() {
+      if (botDiv.textContent.includes(".")) {
+        return;
+      }
+
+      botDiv.textContent += ".";
     }
 
     function emptyDivs() {
