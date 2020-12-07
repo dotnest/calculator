@@ -61,14 +61,15 @@
     function processButton(event) {
       let pressedChar = event.srcElement.textContent;
 
+      console.log(topNumber, botNumber);
+
       if ("0123456789".includes(pressedChar)) {
         processNumber(pressedChar);
       } else if ("/*-+".includes(pressedChar)) {
         processOperation(pressedChar);
       } else if (pressedChar === "=") {
-        console.log("pressed 'equals'");
+        processEquals();
       } else if (pressedChar === ".") {
-        console.log("pressed 'point'");
         processPoint();
       } else if (pressedChar === "C") {
         emptyDivs();
@@ -111,15 +112,32 @@
           topNumber = divide(topNumber, botNumber);
           break;
 
+        case "=":
+          prevOper = oper;
+          return;
+
         default:
           return;
       }
+
       prevOper = oper;
       topDiv.textContent = topNumber;
       botDiv.textContent = "";
     }
 
+    function processEquals() {
+      console.log("pressed equals");
+      if (!botDiv.textContent) {
+        return;
+      }
+      if (!topDiv.textContent) {
+        return;
+      }
+      processOperation("=");
+    }
+
     function processPoint() {
+      console.log("pressed 'point'");
       if (botDiv.textContent.includes(".")) {
         return;
       }
